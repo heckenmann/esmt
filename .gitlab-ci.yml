@@ -10,5 +10,6 @@ build:
     
 test:
   script:
+    npm install
     npm test
     npm e2e
