@@ -1,10 +1,14 @@
+image: 7.8.0
 before_script:
   - apt-get update -qq && apt-get install -y -qq build-essential
-  - curl -sL https://deb.nodesource.com/setup_7.x | bash -
-  - apt-get install -y nodejs
   - npm install -g @angular/cli
 
-rspec:
+build:
   script:
     npm install
     ng bundle
+    
+test:
+  script:
+    npm test
+    npm e2e
