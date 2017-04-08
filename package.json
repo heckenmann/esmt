@@ -1,6 +1,6 @@
 {
   "name": "esmt",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -22,7 +22,11 @@
     "@angular/router": "^3.4.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.7.6"
+    "zone.js": "^0.7.6",
+    "@atlassian/aui" : "6.0.6",
+    "jquery" : "^2.0.0",
+    "ng2-table" : "^1",
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0-rc.0",

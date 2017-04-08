@@ -1,0 +1,97 @@
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Cluster Dashboard "{{clusterHealth.cluster_name}}"</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+
+      <div style="text-align: center;">
+        <span class="own-metric">
+          Nodes:
+          <div class="own-metric-value">
+            {{ clusterHealth.number_of_nodes }}
+          </div>
+        </span>
+        <span class="own-metric">
+          Indices:
+          <div class="own-metric-value">
+            {{ clusterStats.indices?.count }}
+          </div>
+        </span>
+        <span class="own-metric">
+          Shards:
+          <div class="own-metric-value">
+            {{ stats._shards?.successful }} / {{ stats._shards?.total }}
+          </div>
+        </span>
+        <span class="own-metric">
+          Documents:
+          <div class="own-metric-value">
+            {{ stats._all?.primaries.docs.count }}
+          </div>
+        </span>
+        <span class="own-metric">
+          Documents deleted:
+          <div class="own-metric-value">
+            {{ stats._all?.primaries.docs.deleted }}
+          </div>
+        </span>
+        <span class="own-metric">
+        Size:
+          <div class="own-metric-value">
+          {{ stats._all?.primaries.store.size_in_bytes | filesize }}
+          </div>
+        </span>
+      </div>
+
+      <div class="aui-group aui-group">
+        <div class="aui-item">
+          <h2>Health</h2>
+          <table class="aui">
+            <tbody>
+              <tr *ngFor="let state of clusterHealth | mapValues">
+                <td>{{state.key}}</td>
+                <td>
+                  <span [class.aui-lozenge]="(state.val | checkState:state.key) != null" [class.aui-lozenge-success]="(state.val | checkState:state.key) == 'SUCCESS'" [class.aui-lozenge-current]="(state.val | checkState:state.key) == 'WARNING'" [class.aui-lozenge-error]="(state.val | checkState:state.key) == 'ERROR'"
+                      [class.aui-lozenge-default]="(state.val | checkState:state.key) == 'DEFAULT'">{{state.val}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="aui-item">
+          <h2>Nodes ( {{ clusterHealth.number_of_nodes }} )</h2>
+          <div *ngFor="let node of nodesStats?.nodes | mapValues">
+            <button id="node_button_{{node.key}}" class="aui-button" routerLink="/nodes/{{node.key}}">{{node.val.name}}</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

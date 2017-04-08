@@ -1,0 +1,72 @@
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Node "{{nodeStats.name}}"</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<style>
+  .nestedTable td {
+    width: 80px;
+  }
+</style>
+<div class="aui-page-panel nestedTable">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+      <div class="aui-group aui-group-split">
+        <div class="aui-item">
+          <h2>Informations</h2>
+          <table class="aui">
+            <tbody *ngFor="let info of nodeInfo | mapValues">
+              <tr *ngIf="!(info.val | isMap)">
+                <td>{{info.key}}</td>
+                <td>{{info.val}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="aui-item">
+          <h2>Roles</h2>
+          <table class="aui">
+            <tbody *ngFor="let roles of nodeInfo.roles | mapValues">
+              <tr>
+                <td>{{roles.key}}</td>
+                <td>{{roles.val}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h2>JVM</h2>
+      <table class="aui">
+        <tbody *ngFor="let info of nodeInfo.jvm | mapValues">
+          <tr>
+            <td>{{info.key}}</td>
+            <td>{{info.val}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

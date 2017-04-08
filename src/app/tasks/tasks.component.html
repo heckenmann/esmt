@@ -1,0 +1,63 @@
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Tasks (Cluster)</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+
+      <!--No-Tasks Message-->
+      <div class="aui-message aui-message-default" *ngIf="tasks?.length === 0">
+        <p class="title">
+          <strong>Cluster-Tasks Information</strong>
+        </p>
+        <p>Currently there is no running task in your cluster.</p>
+      </div>
+
+      <table class="aui" *ngIf="tasks?.length > 0">
+        <thead>
+          <tr>
+            <th>insert_order</th>
+            <th>priority</th>
+            <th>source</th>
+            <th>time_in_queue_millis</th>
+            <th>time_in_queue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <th>{{task.insert_order}}</th>
+            <th>{{task.priority}}</th>
+            <th>{{task.source}}</th>
+            <th>{{task.time_in_queue_millis}}</th>
+            <th>{{task.time_in_queue}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

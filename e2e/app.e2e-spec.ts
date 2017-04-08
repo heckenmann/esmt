@@ -1,6 +1,6 @@
 import { EsmtPage } from './app.po';
 
-describe('esmt App', () => {
+describe('esmt App', function() {
   let page: EsmtPage;
 
   beforeEach(() => {

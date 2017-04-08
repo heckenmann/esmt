@@ -1,0 +1,245 @@
+<!-- Dialoge -->
+<section role="dialog" id="new-repository-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+  <form #newRepositoryForm="ngForm" class="aui" (ngSubmit)="createRepository()">
+    <header class="aui-dialog2-header">
+      <h2 class="aui-dialog2-header-main">New Repository</h2>
+      <div class="aui-dialog2-header-secondary">
+      </div>
+      <a class="aui-dialog2-header-close">
+        <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+      </a>
+    </header>
+    <div class="aui-dialog2-content">
+      <div class="field-group">
+        <label for="reponame">Repository Name:<span class="aui-icon icon-required">(required)</span></label>
+        <input name="reponame" class="text" type="text" id="reponame" [(ngModel)]="newrepo.name" required placeholder="backups, filer01, ..." />
+      </div>
+      <div class="field-group">
+        <label for="type">type:</label>
+        <select class="select" id="type" name="type" [(ngModel)]="newrepo.data.type">
+          <option>fs</option>
+          <option>url</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="verify">verify:</label>
+        <input class="checkbox" type="checkbox" name="verify" id="verify" [(ngModel)]="newrepo.verify" />
+        <div class="description">Recommended</div>
+      </div>
+      <div class="field-group">
+        <label for="compress">compress:</label>
+        <input class="checkbox" type="checkbox" name="compress" id="compress" [(ngModel)]="newrepo.data.settings.compress" />
+      </div>
+      <div class="field-group">
+        <label for="readonly">readonly:</label>
+        <input class="checkbox" type="checkbox" name="readonly" id="readonly" [(ngModel)]="newrepo.data.settings.readonly" />
+      </div>
+      <div class="field-group">
+        <label for="path">path:<span class="aui-icon icon-required">(required)</span></label>
+        <input name="path" class="text full-width-field" type="text" id="path" [(ngModel)]="newrepo.data.settings.location" required placeholder="/mount/backups" />
+        <div class="description">Location must be set in /etc/elasticsearch/elasticsearch.yml: e.g. path.repo: ["/mount/backups"]</div>
+      </div>
+      <div class="field-group">
+        <label for="chunk_size">chunk_size:</label>
+        <input name="chunk_size" class="text" type="text" id="chunk_size" [(ngModel)]="newrepo.data.settings.chunk_size" placeholder="i.e. 1g, 10m, 5k" />
+        <div class="description">Default: null</div>
+      </div>
+      <div class="field-group">
+        <label for="max_restore_bytes_per_sec">max_restore_bytes_per_sec:</label>
+        <input name="max_restore_bytes_per_sec" class="text" type="text" id="max_restore_bytes_per_sec" [(ngModel)]="newrepo.data.settings.max_restore_bytes_per_sec" placeholder="40mb" />
+        <div class="description">Default: 40mb</div>
+      </div>
+      <div class="field-group">
+        <label for="max_snapshot_bytes_per_sec">max_snapshot_bytes_per_sec:</label>
+        <input name="max_snapshot_bytes_per_sec" class="text" type="text" id="max_snapshot_bytes_per_sec" [(ngModel)]="newrepo.data.settings.max_snapshot_bytes_per_sec" placeholder="40mb" />
+        <div class="description">Default: 40mb</div>
+      </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+      <div class="aui-dialog2-footer-actions">
+        <input class="aui-button aui-button-primary" type="submit" value="Create Repository" [disabled]="!newRepositoryForm.form.valid" />
+      </div>
+    </footer>
+  </form>
+</section>
+
+<section role="dialog" id="new-snapshot-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+  <form #newSnapshotForm="ngForm" class="aui" (ngSubmit)="createSnapshot()">
+    <header class="aui-dialog2-header">
+      <h2 class="aui-dialog2-header-main">New Repository</h2>
+      <div class="aui-dialog2-header-secondary">
+      </div>
+      <a class="aui-dialog2-header-close">
+        <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+      </a>
+    </header>
+    <div class="aui-dialog2-content">
+      <div class="field-group">
+        <label for="reponame">Snapshot Name:<span class="aui-icon icon-required">(required)</span></label>
+        <input name="reponame" class="text" type="text" id="reponame" [(ngModel)]="newsnapshot.name" required placeholder="my-snapshot" />
+      </div>
+      <div class="field-group">
+        <label for="type">repository:<span class="aui-icon icon-required">(required)</span></label>
+        <select class="select" id="type" name="type" [(ngModel)]="newsnapshot.repository" required>
+          <option *ngFor="let repo of repositories | mapValues" [value]="repo.key">{{repo.key}}</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label for="ignore_unavailable">ignore_unavailable:</label>
+        <input class="checkbox" type="checkbox" name="ignore_unavailable" id="ignore_unavailable" [(ngModel)]="newsnapshot.data.ignore_unavailable" />
+      </div>
+      <div class="field-group">
+        <label for="include_global_state">include_global_state:</label>
+        <input class="checkbox" type="checkbox" name="include_global_state" id="include_global_state" [(ngModel)]="newsnapshot.data.include_global_state" />
+      </div>
+      <div class="field-group">
+        <label for="indicesselect">indices:<span class="aui-icon icon-required">(required)</span></label>
+        <select class="multi-select" size="15" multiple="multiple" id="indicesselect" name="indicesselect" required [(ngModel)]="newsnapshot.indices">
+            <option *ngFor="let alias of aliases | mapValues">{{alias.key}}</option>
+        </select>
+      </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+      <div class="aui-dialog2-footer-actions">
+        <div class="buttons">
+          <input class="aui-button aui-button-primary" type="submit" value="Create Snapshot" [disabled]="!newSnapshotForm.form.valid" />
+        </div>
+      </div>
+    </footer>
+  </form>
+</section>
+
+
+<!-- Content -->
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Snapshot API</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+            <a id="snapshotapi-doc-button" class="aui-button" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-snapshots.html" target="_blank">Official Doc</a>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+      <h2>Repositories</h2>
+
+      <div class="aui-toolbar2" role="toolbar">
+        <div class="aui-toolbar2-inner">
+          <div class="aui-toolbar2-primary">
+            <div class="aui-buttons">
+              <button id="new-repository-button" class="aui-button" (click)="showNewRepositoryDialog()">New Repository</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="aui-message aui-message-warning" *ngIf="(repositories | json)  === '{}'">
+        <p class="title">
+          <strong>Repositories Information</strong>
+        </p>
+        <p>Before any snapshot or restore operation can be performed, a snapshot repository should be registered in Elasticsearch.</p>
+      </div>
+
+      <table id="repostable" class="aui" *ngIf="(repositories | json)  !== '{}'">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Settings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let repo of repositories | mapValues">
+            <td><a (click)="deleteRepo(repo.key)">Delete</a></td>
+            <td>{{repo.key}}</td>
+            <td>{{repo.val.type}}</td>
+            <td>{{repo.val.settings | json}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+      <h2>Snapshots</h2>
+
+      <div class="aui-toolbar2" role="toolbar">
+        <div class="aui-toolbar2-inner">
+          <div class="aui-toolbar2-primary">
+            <div class="aui-buttons">
+              <button id="new-snapshot-button" class="aui-button" (click)="showNewSnapshotDialog()" [disabled]="(repositories | json)  === '{}'">New Snapshot</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table id="snapshotstable" class="aui" *ngIf="(repositories | json)  !== '{}'">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Repository</th>
+            <th>Snapshot</th>
+            <th>State</th>
+            <th>Version</th>
+            <th>Start Time</th>
+            <th>Duration ms</th>
+            <th>Failed Shards</th>
+            <th>Indices</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let snapshot of snapshots">
+            <td>
+              <a>Restore</a>
+              <a (click)="deleteSnapshot(snapshot.repository, snapshot.data.snapshot)">Delete</a>
+            </td>
+            <td>{{snapshot.repository}}</td>
+            <td>{{snapshot.data.snapshot}}</td>
+            <td>
+              <span [class.aui-lozenge]="(snapshot.data.state | checkState:'snapshot_state') != null"
+                    [class.aui-lozenge-success]="(snapshot.data.state | checkState:'snapshot_state') == 'SUCCESS'"
+                    [class.aui-lozenge-current]="(snapshot.data.state | checkState:'snapshot_state') == 'WARNING'"
+                    [class.aui-lozenge-error]="(snapshot.data.state | checkState:'snapshot_state') == 'ERROR'"
+                    [class.aui-lozenge-default]="(snapshot.data.state | checkState:'snapshot_state') == 'DEFAULT'">{{snapshot.data.state}}</span></td>
+            <td>{{snapshot.data.version}}</td>
+            <td>{{snapshot.data.start_time_in_millis | date:'short'}}</td>
+            <td>{{snapshot.data.duration_in_millis}}</td>
+            <td>{{snapshot.data.shards.failed}}</td>
+            <td>
+              <a data-replace-text="Hide" class="aui-expander-trigger" [attr.aria-controls]="'snapshot-indices-list-' + snapshot.data.uuid">Show all</a>
+              <ul id="snapshot-indices-list-{{snapshot.data.uuid}}" class="aui-expander-content" aria-hidden="true">
+                <li *ngFor="let index of snapshot.data.indices">{{index}}</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<form class="aui">
+  <div class="aui-page-panel-inner">
+    <div class="aui-page-panel-content">
+      <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+          <div class="aui-page-header-image">
+          </div>
+          <div class="aui-page-header-main">
+            <h1>Settings</h1>
+          </div>
+          <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+              <button id="refresh_button" class="aui-button aui-button-primary" type="submit" (click)="save()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+      <section class="aui-page-panel-content">
+
+
+        <div class="field-group">
+          <label for="esurl">ES-URL
+            <span class="aui-icon icon-required">(required)</span></label>
+          <input class="text long-field" type="text" id="esurl" name="esurl" [(ngModel)]="esurl" required="required" />
+          <div class="description">
+            e.g. http://localhost:9200<br />
+            'http.cors.enabled: true' and 'http.cors.allow-origin: "*"' must be set in elasticsearch-config!
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </div>
+</form>

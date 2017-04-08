@@ -1,0 +1,88 @@
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Index "{{ id }}"</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+
+
+      <div class="aui-toolbar2" role="toolbar">
+        <div class="aui-toolbar2-inner">
+          <div class="aui-toolbar2-primary">
+            <div class="aui-buttons">
+              <button class="aui-button" disabled="disabled">Open</button>
+              <button class="aui-button" disabled="disabled">Close</button>
+            </div>
+            <div class="aui-buttons">
+              <button class="aui-button" disabled="disabled">Shrink</button>
+              <button class="aui-button" disabled="disabled">Rollover</button>
+              <button class="aui-button" disabled="disabled">Force Merge</button>
+              <button class="aui-button" disabled="disabled">Refresh</button>
+            </div>
+          </div>
+          <div class="aui-toolbar2-secondary">
+            <button class="aui-button aui-button-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <table class="aui">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Type</th>
+            <th>Properties</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let type of settings[id]?.mappings | mapValues">
+            <td> <a>Details</a> </td>
+            <td>{{type.key}}</td>
+            <td>
+              <table class="aui">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let property of type.val.properties | mapValues">
+                    <td style="width: 40%;">{{property.key}}</td>
+                    <td>{{property.val.type}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </section>
+  </div>
+</div>

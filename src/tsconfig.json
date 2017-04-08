@@ -1,19 +1,23 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "",
+    "mapRoot": "./",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
-      "es2016"
+      "es6",
+      "dom"
     ],
-    "outDir": "../dist/out-tsc-e2e",
-    "module": "commonjs",
+    "moduleResolution": "node",
+    "module": "es6",
     "target": "es6",
-    "types":[
-      "jasmine",
-      "node"
+    "typeRoots": [
+      "../node_modules/@types"
     ]
   }
 }

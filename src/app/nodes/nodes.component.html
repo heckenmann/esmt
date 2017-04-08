@@ -1,0 +1,61 @@
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Nodes "{{nodesStats.cluster_name}}"</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+
+      <table id="nodes" class="aui">
+        <thead>
+          <tr>
+            <th id="th_options"></th>
+            <th id="th_name" class="aui-table-column-issue-key">Name</th>
+            <th id="th_transport_address">Transport address</th>
+            <th id="th_doc_count">Doc count / deleted</th>
+            <th id="th_cpu">CPU percent</th>
+            <th id="th_load_average">Load average 1m / 5m / 15m</th>
+            <th id="th_jvm_threads_count">JVM threads count / peak</th>
+            <th id="th_fs_total_available">Filesystem space available / total MB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let node of nodesStats?.nodes | mapValues">
+            <td headers="th_options"><a [routerLink]="['/nodes', node.key]">Details</a></td>
+            <td headers="th_name">{{node.val.name}}</td>
+            <td headers="th_transport_address">{{node.val.transport_address}}</td>
+            <td headers="th_transport_address">{{node.val.indices.docs.count}} / {{node.val.indices.docs.deleted}}</td>
+            <td headers="th_transport_address">{{node.val.os.cpu.percent}} %</td>
+            <td headers="th_load_average">{{node.val.os.cpu.load_average['1m']}} / {{node.val.os.cpu.load_average['5m']}} / {{node.val.os.cpu.load_average['15m']}}</td>
+            <td headers="th_load_jvm_threads_count">{{node.val.jvm.threads.count}} / {{node.val.jvm.threads.peak_count}}</td>
+            <td headers="th_fs_total_available">{{node.val.fs.total.available_in_bytes /1024/1024 | number:'1.0-0'}} / {{node.val.fs.total.total_in_bytes /1024/1024 | number:'1.0-0'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

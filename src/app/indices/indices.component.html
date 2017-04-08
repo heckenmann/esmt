@@ -1,0 +1,134 @@
+<!-- Dialoge -->
+<section role="dialog" id="new-index-dialog" class="aui-layer aui-dialog2 aui-dialog2-medium" aria-hidden="true">
+  <form class="aui">
+    <header class="aui-dialog2-header">
+      <h2 class="aui-dialog2-header-main">New Index</h2>
+      <div class="aui-dialog2-header-secondary">
+      </div>
+      <a class="aui-dialog2-header-close">
+        <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+      </a>
+    </header>
+    <div class="aui-dialog2-content">
+      <div class="field-group">
+        <label for="new-index-name">Index Name <span class="aui-icon icon-required">(required)</span></label>
+        <input required class="text medium-field" type="text" id="new-index-name" name="new-index-name">
+        <div class="description">New Index Name</div>
+      </div>
+      <hr />
+      <div class="field-group">
+        <label for="new-index-number-of-shards">Number of shards</label>
+        <input class="text short-field" type="text" id="new-index-number-of-shards" name="new-index-number-of-shards">
+        <div class="description">Optional</div>
+      </div>
+      <div class="field-group">
+        <label for="new-index-number-of-replicas">Number of replicas</label>
+        <input class="text short-field" type="text" id="new-index-number-of-replicas" name="new-index-number-of-replicas">
+        <div class="description">Optional</div>
+      </div>
+    </div>
+    <footer class="aui-dialog2-footer">
+      <div class="aui-dialog2-footer-actions">
+        <input class="button submit" type="submit" value="Create" (click)="createNewIndex()" />
+        <button class="aui-button aui-button-link" (click)="closeNewIndexDialog()">Close</button>
+      </div>
+    </footer>
+  </form>
+</section>
+
+<!-- Content -->
+<div class="aui-page-panel-inner">
+  <div class="aui-page-panel-content">
+    <header class="aui-page-header">
+      <div class="aui-page-header-inner">
+        <div class="aui-page-header-image">
+        </div>
+        <div class="aui-page-header-main">
+          <h1>Indices</h1>
+        </div>
+        <div class="aui-page-header-actions">
+          <div class="aui-buttons">
+            <button id="refresh_button" class="aui-button aui-button-primary" (click)="refresh()">Refresh</button>
+            <button class="aui-button aui-dropdown2-trigger aui-button-split-more" aria-haspopup="true" aria-owns="split-container-dropdown">Auorefresh</button>
+            <div id="split-container-dropdown" class="aui-dropdown2 aui-style-default" role="menu" aria-hidden="true">
+              <ul class="aui-list-truncate">
+                <li><a (click)="stopTimer()">Auto-Refresh Off</a></li>
+                <li><a (click)="startTimer(1000)">Auto-Refresh 1s</a></li>
+                <li><a (click)="startTimer(10000)">Auto-Refresh 10s</a></li>
+                <li><a (click)="startTimer(60000)">Auto-Refresh 1m</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="aui-page-panel">
+  <div class="aui-page-panel-inner">
+    <section class="aui-page-panel-content">
+      <div class="aui-toolbar2" role="toolbar">
+        <div class="aui-toolbar2-inner">
+          <div class="aui-toolbar2-primary">
+            <div class="aui-buttons">
+              <button id="new-index-button" class="aui-button" (click)="showNewIndexDialog()">New Index</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table id="index-table" class="aui">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Index name</th>
+            <th>Aliases</th>
+            <th>Open / Close</th>
+            <th>Creation date</th>
+            <th>Number of shards</th>
+            <th>Number of replicas</th>
+            <th>Size</th>
+            <th>Docs count</th>
+            <th>Docs deleted</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let index of indicesStates | mapValues">
+            <td> <a [routerLink]="['/indices', index.key]">Details</a> </td>
+            <td>{{index.key}}</td>
+            <td>
+              <span *ngFor="let alias of aliases[index.key]?.aliases | mapValues" class="aui-lozenge aui-lozenge-moved">{{alias.key}}</span>
+            </td>
+            <td>
+              <span [class.aui-lozenge]="(indicesStates[index.key]?.state | checkState:'state') != null" [class.aui-lozenge-success]="(indicesStates[index.key]?.state | checkState:'state') == 'SUCCESS'" [class.aui-lozenge-error]="(indicesStates[index.key]?.state | checkState:'state') == 'ERROR'"
+                  [class.aui-lozenge-default]="(indicesStates[index.key]?.state | checkState:'state') == 'default'">{{indicesStates[index.key]?.state}}</span>
+            </td>
+            <td>
+              {{ settings[index.key]?.settings.index.creation_date | date:'short' }}
+            </td>
+            <td>
+              {{ settings[index.key]?.settings.index.number_of_shards }}
+            </td>
+            <td>
+              {{ settings[index.key]?.settings.index.number_of_replicas }}
+            </td>
+            <td>
+              {{ indicesStats[index.key]?.primaries.store.size_in_bytes | filesize }}
+            </td>
+            <td>
+              {{ indicesStats[index.key]?.primaries.docs.count }}
+            </td>
+            <td>
+              {{ indicesStats[index.key]?.primaries.docs.deleted }}
+            </td>
+            <td>
+              <a>Open / Close</a> <a>Delete</a> <a>Shrink</a> <a>Rollover</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
