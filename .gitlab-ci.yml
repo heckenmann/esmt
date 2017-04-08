@@ -1,6 +1,8 @@
 before_script:
   - apt-get update -qq && apt-get install -y -qq nodejs npm
+  - npm install -g @angular/cli
 
 rspec:
   script:
+    npm install
     ng bundle
