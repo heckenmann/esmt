@@ -18,7 +18,7 @@ e2e_test:
     - npm install --dev
     # install chrome
     - apt-get update
-    - apt-get install -y chromium-browser xvfb
+    - apt-get install -y chromium chromium-l10n xvfb
     - rm -rf /var/lib/apt/lists/*
 
     # xvfb
