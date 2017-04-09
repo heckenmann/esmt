@@ -6,7 +6,6 @@ before_script:
 build:
   script:
     - npm install
-    - ng bundle
 
 test:
   services:
