@@ -6,13 +6,13 @@ before_script:
 
 build:
   script:
-    npm install
-    ng bundle
+    - npm install
+    - ng bundle
 
 test:
   services:
     - docker.elastic.co/elasticsearch/elasticsearch:5.3.0
   script:
-    npm install --dev
-    npm test
-    npm e2e
+    - npm install --dev
+    - npm test
+    - npm e2e
