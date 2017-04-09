@@ -1,8 +1,12 @@
 image: node:7.8.0
-before_script:
-  - npm install -g @angular/cli
+
+cache:
+  paths:
+    - node_modules/
 
 build:
+  before_script:
+    - npm install -g @angular/cli
   script:
     - npm install
 
@@ -10,7 +14,8 @@ e2e_test:
   services:
     - docker.elastic.co/elasticsearch/elasticsearch:5.3.0
   before_script:
-  # install chrome
+    - npm install -g @angular/cli
+    # install chrome
     - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
     - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
     - apt-get update
