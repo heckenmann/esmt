@@ -151,6 +151,10 @@ export class SnapshotsComponent extends SuperComponent implements OnInit {
     }
   }
 
+  restoreSnapshot(repository: string, snapshot: string) {
+    
+  }
+
   showNewRepositoryDialog() {
     this._window.nativeWindow.AJS.dialog2('#new-repository-dialog').show();
   }
