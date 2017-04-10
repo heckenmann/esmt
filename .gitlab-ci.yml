@@ -11,11 +11,9 @@ build:
     - npm install
 
 e2e_test:
-  services:
-    - docker.elastic.co/elasticsearch/elasticsearch:5.3.0
   before_script:
     - npm install -g @angular/cli
-    - npm install --dev
+    - npm install --only=dev
     # install chrome
     - apt-get update
     - apt-get install -y chromium chromium-l10n xvfb
