@@ -2,7 +2,7 @@ image: node:7.8.0
 
 cache:
   paths:
-    - node_modules/
+    - ~/.npm/
 
 build:
   before_script:
@@ -15,12 +15,13 @@ e2e_test:
     - npm install -g @angular/cli
     - npm install
     - npm install --only=dev
-    # install chrome
+
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
     - apt-get update
-    - apt-get install -y chromium chromium-l10n xvfb default-jre
+    - apt-get install -y -qq google-chrome-stable xvfb default-jre
     - rm -rf /var/lib/apt/lists/*
 
-    # xvfb
     - export DISPLAY=:99.0
     - Xvfb -ac $DISPLAY &
     - sleep 10
