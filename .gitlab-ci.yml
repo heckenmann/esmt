@@ -13,6 +13,7 @@ build:
 e2e_test:
   before_script:
     - npm install -g @angular/cli
+    - npm install
     - npm install --only=dev
     # install chrome
     - apt-get update
