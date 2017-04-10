@@ -12,7 +12,7 @@ build:
 
 e2e_test:
   before_script:
-    - npm install -g @angular/cli
+    - npm install -g @angular/cli protractor
     - npm install
     - npm install --only=dev
     # install chrome
