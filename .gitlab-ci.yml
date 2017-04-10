@@ -12,12 +12,12 @@ build:
 
 e2e_test:
   before_script:
-    - npm install -g @angular/cli protractor
+    - npm install -g @angular/cli
     - npm install
     - npm install --only=dev
     # install chrome
     - apt-get update
-    - apt-get install -y chromium chromium-l10n xvfb
+    - apt-get install -y chromium chromium-l10n xvfb default-jre
     - rm -rf /var/lib/apt/lists/*
 
     # xvfb
