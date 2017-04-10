@@ -23,6 +23,6 @@ e2e_test:
     # xvfb
     - export DISPLAY=:99.0
     - Xvfb -ac $DISPLAY &
-
+    - sleep 10
   script:
     - ng e2e
