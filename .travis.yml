@@ -10,7 +10,7 @@ services:
   - docker
 
 before_install:
-  - ng install -g @angular/cli
+  - npm install -g @angular/cli
   - npm install
   - npm install --only=dev
 
