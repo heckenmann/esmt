@@ -28,4 +28,4 @@ before_install:
 
 script:
   - ng e2e && ng build --prod
-  - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID
+  - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
