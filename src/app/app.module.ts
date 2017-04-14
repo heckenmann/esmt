@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { JsonpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 // import { HttpCacheModule } from 'ng-http-cache';
+import { HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -112,7 +112,8 @@ import { FlagService } from './flag.service';
     SettingsService,
     HttpService,
     WindowRefService,
-    FlagService
+    FlagService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
