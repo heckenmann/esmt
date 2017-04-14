@@ -1,4 +1,4 @@
-[![build status](https://gitlab.com/heckenmann/esmt/badges/master/build.svg)](https://gitlab.com/heckenmann/esmt/commits/master)
+[![Build Status](https://travis-ci.org/heckenmann/esmt.svg?branch=master)](https://travis-ci.org/heckenmann/esmt)
 
 ***!!! Under development !!!***
 
@@ -16,7 +16,7 @@ Used: &#10004;
 Not yet used: &#10008;
 
 elasticsearch API | Category | ESMT
---- | ---
+--- | --- | ---
 Search | Search APIs | &#10004;
 Cluster Health | Cluster APIs | &#10004;
 Cluster State | Cluster APIs | &#10004;
