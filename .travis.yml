@@ -13,6 +13,14 @@ before_install:
   - npm install -g @angular/cli
   - npm install
   - npm install --only=dev
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+  - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+  - apt-get update
+  - apt-get install -y -qq google-chrome-stable xvfb default-jre
+  - export CHROME_BIN=google-chrome
+  - export DISPLAY=:99.0
+  - Xvfb $DISPLAY -ac &
+  - sleep 10
 
 script:
   - ng e2e && ng build --prod
