@@ -15,4 +15,4 @@ before_install:
   - npm install --only=dev
 
 script:
-  - ng install --prod
+  - ng e2e && ng build --prod
