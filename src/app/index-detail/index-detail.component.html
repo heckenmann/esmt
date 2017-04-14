@@ -60,7 +60,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let type of settings[id]?.mappings | mapValues">
+          <tr *ngFor="let type of settings['id']?.mappings | mapValues">
             <td> <a>Details</a> </td>
             <td>{{type.key}}</td>
             <td>
@@ -72,7 +72,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let property of type.val.properties | mapValues">
+                  <tr *ngFor="let property of type.val?.properties | mapValues">
                     <td style="width: 40%;">{{property.key}}</td>
                     <td>{{property.val.type}}</td>
                   </tr>

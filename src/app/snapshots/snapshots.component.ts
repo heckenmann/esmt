@@ -13,7 +13,7 @@ export class SnapshotsComponent extends SuperComponent implements OnInit {
 
   repositories: Map<string, any>;
   snapshots: Array<any>;
-  newrepo = {
+  newrepo: any = {
     name: null,
     verify: true,
     data: {
@@ -31,7 +31,7 @@ export class SnapshotsComponent extends SuperComponent implements OnInit {
 
   aliases: Map<string, any>;
 
-  newsnapshot = {
+  newsnapshot: any = {
     repository: null,
     indices: null,
     name,
@@ -54,19 +54,19 @@ export class SnapshotsComponent extends SuperComponent implements OnInit {
     // Snapshots
     this._http.getESResource(HttpPaths.ALL_REPOSITORIES).subscribe(
       repositories => {
-        this.repositories = repositories;
+        this.repositories = repositories as Map<string, any>;
         this.snapshots = new Array<any>();
         for (let repo in repositories) {
           this._http.getESResource(HttpPaths.REPOSITORIES + '/' + repo + '/_all').subscribe(
             snapshots => {
-              let ssValues = snapshots['snapshots'];
+              let ssValues: Map<string, any> = snapshots['snapshots'];
               for (let position in ssValues) {
-                this.snapshots.push({
+                let snapshotToAdd: any = {
                   repository: repo,
                   data: ssValues[position]
-                });
+                };
+                this.snapshots.push(snapshotToAdd);
               }
-              //console.log(JSON.stringify(snapshots));
             }
           );
         }
@@ -152,7 +152,7 @@ export class SnapshotsComponent extends SuperComponent implements OnInit {
   }
 
   restoreSnapshot(repository: string, snapshot: string) {
-    
+
   }
 
   showNewRepositoryDialog() {

@@ -5,7 +5,7 @@
         <div class="aui-page-header-image">
         </div>
         <div class="aui-page-header-main">
-          <h1>Cluster Dashboard "{{clusterHealth.cluster_name}}"</h1>
+          <h1>Cluster Dashboard "{{clusterHealth['cluster_name']}}"</h1>
         </div>
         <div class="aui-page-header-actions">
           <div class="aui-buttons">
@@ -34,37 +34,37 @@
         <span class="own-metric">
           Nodes:
           <div class="own-metric-value">
-            {{ clusterHealth.number_of_nodes }}
+            {{ clusterHealth['number_of_nodes'] }}
           </div>
         </span>
         <span class="own-metric">
           Indices:
           <div class="own-metric-value">
-            {{ clusterStats.indices?.count }}
+            {{ clusterStats['indices']?.count }}
           </div>
         </span>
         <span class="own-metric">
           Shards:
           <div class="own-metric-value">
-            {{ stats._shards?.successful }} / {{ stats._shards?.total }}
+            {{ stats['_shards']?.successful }} / {{ stats['_shards']?.total }}
           </div>
         </span>
         <span class="own-metric">
           Documents:
           <div class="own-metric-value">
-            {{ stats._all?.primaries.docs.count }}
+            {{ stats['_all']?.primaries.docs.count }}
           </div>
         </span>
         <span class="own-metric">
           Documents deleted:
           <div class="own-metric-value">
-            {{ stats._all?.primaries.docs.deleted }}
+            {{ stats['_all']?.primaries.docs.deleted }}
           </div>
         </span>
         <span class="own-metric">
         Size:
           <div class="own-metric-value">
-          {{ stats._all?.primaries.store.size_in_bytes | filesize }}
+          {{ stats['_all']?.primaries.store.size_in_bytes | filesize }}
           </div>
         </span>
       </div>
@@ -86,8 +86,8 @@
         </div>
 
         <div class="aui-item">
-          <h2>Nodes ( {{ clusterHealth.number_of_nodes }} )</h2>
-          <div *ngFor="let node of nodesStats?.nodes | mapValues">
+          <h2>Nodes ( {{ clusterHealth['number_of_nodes'] }} )</h2>
+          <div *ngFor="let node of nodesStats['nodes'] | mapValues">
             <button id="node_button_{{node.key}}" class="aui-button" routerLink="/nodes/{{node.key}}">{{node.val.name}}</button>
           </div>
         </div>

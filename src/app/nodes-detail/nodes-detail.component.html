@@ -5,7 +5,7 @@
         <div class="aui-page-header-image">
         </div>
         <div class="aui-page-header-main">
-          <h1>Node "{{nodeStats.name}}"</h1>
+          <h1>Node "{{nodeStats['name']}}"</h1>
         </div>
         <div class="aui-page-header-actions">
           <div class="aui-buttons">
@@ -49,7 +49,7 @@
         <div class="aui-item">
           <h2>Roles</h2>
           <table class="aui">
-            <tbody *ngFor="let roles of nodeInfo.roles | mapValues">
+            <tbody *ngFor="let roles of nodeInfo['roles'] | mapValues">
               <tr>
                 <td>{{roles.key}}</td>
                 <td>{{roles.val}}</td>
@@ -60,7 +60,7 @@
       </div>
       <h2>JVM</h2>
       <table class="aui">
-        <tbody *ngFor="let info of nodeInfo.jvm | mapValues">
+        <tbody *ngFor="let info of nodeInfo['jvm'] | mapValues">
           <tr>
             <td>{{info.key}}</td>
             <td>{{info.val}}</td>
