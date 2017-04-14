@@ -1,12 +1,54 @@
 [![build status](https://gitlab.com/heckenmann/esmt/badges/master/build.svg)](https://gitlab.com/heckenmann/esmt/commits/master)
-# Esmt
 
+***!!! Under development !!!***
+
+# ESMT (elasticsearch management tool)
+
+ESMT is a GUI to manage your elasticsearch cluster and was created as free time project.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
-##Run the application
+## Features
+
+Documentation:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/
+
+Used: &#10004;
+Not yet used: &#10008;
+
+elasticsearch API | Category | ESMT
+--- | ---
+Search | Search APIs | &#10004;
+Cluster Health | Cluster APIs | &#10004;
+Cluster State | Cluster APIs | &#10004;
+Cluster Stats | Cluster APIs | &#10004;
+Pending cluster tasks | Cluster APIs | &#10004;
+Cluster Reroute | Cluster APIs | &#10008;
+Cluster Update Settings | Cluster APIs | &#10008;
+Nodes Stats | Cluster APIs | &#10004;
+Nodes Info | Cluster APIs | &#10004;
+Task Management API | Cluster APIs | &#10008;
+Nodes hot_threads | Cluster APIs | &#10008;
+Cluster Allocation Explain API | Cluster APIs | &#10008;
+snapshot and restore module | Modules | &#10004;
+
+## Screenshot
 TODO
 
-##Development
+## Run the application
+TODO
+
+### Configure elasticsearch
+TODO
+
+## Development
+
+You are welcome to commit your stuff.
+
+### Used products
+- angular 2 (with angular-cli)
+- Atlassian AUI
+- elasticsearch 5
+
 ### Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
