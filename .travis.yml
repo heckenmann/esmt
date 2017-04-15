@@ -12,8 +12,9 @@ services:
 before_install:
   - sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   - sudo chmod +x /usr/local/bin/docker-compose
-  - docker-compose --version
-  - docker run -d --name elasticsearch -p "127.0.0.1:9200:9200" docker.elastic.co/elasticsearch/elasticsearch:5.3.0
+  - docker-compose version
+  - docker-compose -f testingEnv/docker-compose.yml create
+  - docker-compose -f testingEnv/docker-compose.yml start
   - npm install -g @angular/cli
   - npm install
   - npm install --only=dev
@@ -27,5 +28,10 @@ before_install:
   - sleep 10
 
 script:
-  - ng e2e && ng build --prod
+  - ng e2e
+  - ng build --prod
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
+
+after_script:
+  - docker-compose -f testingEnv/docker-compose.yml stop
+  - docker-compose -f testingEnv/docker-compose.yml rm
