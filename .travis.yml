@@ -10,7 +10,7 @@ services:
   - docker
 
 before_install:
-  - sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.4.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   - sudo chmod +x /usr/local/bin/docker-compose
   - docker-compose version
   - docker-compose -f testingEnv/docker-compose.yml create
@@ -29,6 +29,8 @@ before_install:
 
 script:
   - ng e2e
+
+after_success:
   - ng build --prod
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
 
