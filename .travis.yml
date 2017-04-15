@@ -10,20 +10,28 @@ services:
   - docker
 
 before_install:
-  - sudo curl -L "https://github.com/docker/compose/releases/download/1.4.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  # Update Docker
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-engine
+  # Install docker-compose
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   - sudo chmod +x /usr/local/bin/docker-compose
   - docker-compose version
-  - docker-compose -f testingEnv/docker-compose.yml build
+  # Create elasticsearch container and start them
+  - docker-compose -f testingEnv/docker-compose.yml create
   - docker-compose -f testingEnv/docker-compose.yml start
+  # Install angular cli
   - npm install -g @angular/cli
   - npm install
   - npm install --only=dev
+  # Install chrome
   - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee --append /etc/apt/sources.list.d/google.list
   - sudo apt-get update
   - sudo apt-get install -y -qq google-chrome-stable xvfb default-jre
   - export CHROME_BIN=google-chrome
   - export DISPLAY=:99.0
+  # Install xvfb
   - sudo Xvfb $DISPLAY -ac &
   - sleep 10
 
