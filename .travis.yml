@@ -18,8 +18,7 @@ before_install:
   - sudo chmod +x /usr/local/bin/docker-compose
   - docker-compose version
   # Create elasticsearch container and start them
-  - docker-compose -f testingEnv/docker-compose.yml create
-  - docker-compose -f testingEnv/docker-compose.yml start
+  - docker-compose -f testingEnv/docker-compose.yml up -d
   # Install angular cli
   - npm install -g @angular/cli
   - npm install
@@ -43,5 +42,5 @@ after_success:
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
 
 after_script:
-  - docker-compose -f testingEnv/docker-compose.yml stop
-  - docker-compose -f testingEnv/docker-compose.yml rm
+  - docker-compose -f testingEnv/docker-compose.yml down
+  - docker-compose -f testingEnv/docker-compose.yml rm -f
