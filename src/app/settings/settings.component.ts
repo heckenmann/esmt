@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../settings.service';
+import { FlagService } from '../flag.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +13,8 @@ export class SettingsComponent implements OnInit {
   auiPageFocused: boolean;
 
   constructor(
-    private _settings: SettingsService
+    private _settings: SettingsService,
+    private _flags: FlagService
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,7 @@ export class SettingsComponent implements OnInit {
   save() {
     this._settings.esurl = this.esurl;
     this._settings.auiPageFocused = this.auiPageFocused;
+    this._flags.showFlag('Settings Info', 'Settings saved', 'success');
   }
 
 }
