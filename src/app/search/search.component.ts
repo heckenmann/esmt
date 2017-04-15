@@ -33,13 +33,13 @@ export class SearchComponent extends SuperComponent implements OnInit {
     this._httpService.getESResource(HttpPaths.SEARCH + '?q=' + this.searchInput + '&size=' + this.searchSize).subscribe(
       searchResult => {
         this.searchResult = searchResult;
-        this._flagService.showFlag('Search Stats',
+        /*this._flagService.showFlag('Search Stats',
           '<p>Shards total: ' + searchResult._shards.total + '</p>'
             + '<p>Shards successful: ' + searchResult._shards.successful + '</p>'
               + '<p>Shards failed: ' + searchResult._shards.failed + '</p>'
                 + '<p>Timed out: ' + searchResult.timed_out + '</p>'
                   + '<p>Total hits: ' + searchResult.hits.total + '</p>'
-                    + '<p>Max score: ' + searchResult.hits.max_score + '</p>')
+                    + '<p>Max score: ' + searchResult.hits.max_score + '</p>')*/
       }
     );
   }
