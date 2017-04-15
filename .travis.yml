@@ -43,4 +43,3 @@ after_success:
 
 after_script:
   - docker-compose -f testingEnv/docker-compose.yml down
-  - docker-compose -f testingEnv/docker-compose.yml rm -f
