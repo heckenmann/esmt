@@ -1,7 +1,27 @@
-<div class="aui-page-panel">
+<form class="aui">
   <div class="aui-page-panel-inner">
-    <section class="aui-page-panel-content">
-      <form class="aui">
+    <div class="aui-page-panel-content">
+      <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+          <div class="aui-page-header-image">
+          </div>
+          <div class="aui-page-header-main">
+            <h1>Search</h1>
+          </div>
+          <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+              <input class="aui-button aui-button-primary" type="submit" value="Find!" (click)="search()" />
+              <input class="aui-button" type="reset" value="Reset" />
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+      <section class="aui-page-panel-content">
         <div class="field-group">
           <label for="search-input">Keywords</label>
           <input name="search-input" class="text full-width-field" type="text" id="search-input" [(ngModel)]="searchInput" required placeholder="keywords" />
@@ -14,56 +34,52 @@
             <option>1000</option>
           </select>
         </div>
-        <div class="buttons">
-          <input class="aui-button aui-button-primary" type="submit" value="Find!" (click)="search()" />
-          <input class="aui-button" type="reset" value="Reset" />
-        </div>
-      </form>
-    </section>
+      </section>
+    </div>
   </div>
-</div>
-<div class="aui-page-panel">
-  <div class="aui-page-panel-inner">
-    <section class="aui-page-panel-content">
-      <table class="aui">
-        <thead>
-          <tr>
-            <th></th>
-            <th>ES Key</th>
-            <th>Score</th>
-            <th>Index</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let resultEntry of searchResult?.hits?.hits">
-            <td>
-              <a (click)="showJson(resultEntry._id)">JSON</a>
+  <div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+      <section class="aui-page-panel-content">
+        <table class="aui">
+          <thead>
+            <tr>
+              <th></th>
+              <th>ES Key</th>
+              <th>Score</th>
+              <th>Index</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resultEntry of searchResult?.hits?.hits">
+              <td>
+                <a (click)="showJson(resultEntry._id)">JSON</a>
 
-              <section role="dialog" id="dialog-json-{{ resultEntry._id }}" class="aui-layer aui-dialog2 aui-dialog2-large" aria-hidden="true">
-                <!-- Dialog header -->
-                <header class="aui-dialog2-header">
-                  <h2 class="aui-dialog2-header-main">{{ resultEntry._id }}</h2>
-                  <a class="aui-dialog2-header-close">
-                    <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
-                  </a>
-                </header>
-                <!-- Main dialog content -->
-                <div class="aui-dialog2-content">
-                  <textarea class="textarea" style="width: 99%; height: 350px;" readonly="true">{{ resultEntry | json}}</textarea>
-                </div>
-                <!-- Dialog footer -->
-                <footer class="aui-dialog2-footer">
-                </footer>
-              </section>
-            </td>
-            <td>{{ resultEntry._id }}</td>
-            <td>{{ resultEntry._score }}</td>
-            <td>{{ resultEntry._index }}</td>
-            <td>{{ resultEntry._type }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+                <section role="dialog" id="dialog-json-{{ resultEntry._id }}" class="aui-layer aui-dialog2 aui-dialog2-large" aria-hidden="true">
+                  <!-- Dialog header -->
+                  <header class="aui-dialog2-header">
+                    <h2 class="aui-dialog2-header-main">{{ resultEntry._id }}</h2>
+                    <a class="aui-dialog2-header-close">
+                      <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">Close</span>
+                    </a>
+                  </header>
+                  <!-- Main dialog content -->
+                  <div class="aui-dialog2-content">
+                    <textarea class="textarea" style="width: 99%; height: 350px;" readonly="true">{{ resultEntry | json}}</textarea>
+                  </div>
+                  <!-- Dialog footer -->
+                  <footer class="aui-dialog2-footer">
+                  </footer>
+                </section>
+              </td>
+              <td>{{ resultEntry._id }}</td>
+              <td>{{ resultEntry._score }}</td>
+              <td>{{ resultEntry._index }}</td>
+              <td>{{ resultEntry._type }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
   </div>
-</div>
+</form>
