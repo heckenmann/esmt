@@ -1,5 +1,5 @@
 ---
-version: '2'
+version: '3'
 services:
   elasticsearch00:
     image: "docker.elastic.co/elasticsearch/elasticsearch:5.3.0"
@@ -11,6 +11,8 @@ services:
       - http.cors.allow-origin=*
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    networks:
+      - default
   elasticsearch01:
     image: "docker.elastic.co/elasticsearch/elasticsearch:5.3.0"
     links:
@@ -23,6 +25,8 @@ services:
       - http.cors.allow-origin=*
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    networks:
+      - default
   elasticsearch02:
     image: "docker.elastic.co/elasticsearch/elasticsearch:5.3.0"
     links:
@@ -36,6 +40,8 @@ services:
       - http.cors.allow-origin=*
       - xpack.security.enabled=false
       - ES_JAVA_OPTS=-Xms256m -Xmx256m
+    networks:
+      - default
   esmt:
     build:
       context: .
@@ -45,3 +51,9 @@ services:
     privileged: true
     links:
       - elasticsearch00:elasticsearch
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge
