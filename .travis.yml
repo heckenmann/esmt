@@ -12,12 +12,11 @@ before_install:
   - sudo curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
   - sudo chmod +x /usr/local/bin/docker-compose
   - docker-compose version
-  # Create elasticsearch container and start them
+  # Create elasticsearch containers and testcontainer and start them
   - docker-compose -f testingEnv/docker-compose.yml up -d
-  # Testcontainer
-  - docker build -t esmt testingEnv/
+  - sleep 20
 
-  - docker run -d --rm --privileged --name test -v "$(pwd):/opt/esmt" --link testingenv_elasticsearch00_1:elasticsearch --net testingenv_default esmt
+  # Install dependencies
   - docker exec -it test npm install
   - docker exec -it test npm install --only=dev
 
@@ -25,9 +24,8 @@ script:
   - docker exec -it test ng e2e
 
 after_success:
-  - docker run -it --rm -v .:/opt/esmt esmt ng build --prod
+  - docker exec -it test ng build --prod
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
 
 after_script:
-  - docker rm -f test
   - docker-compose -f testingEnv/docker-compose.yml down
