@@ -14,7 +14,8 @@ before_install:
   - sudo chmod +x /usr/local/bin/docker-compose
   - docker-compose version
   # Create elasticsearch containers and testcontainer and start them
-  - docker-compose -f testingEnv/docker-compose.yml up
+  - sudo sysctl -w vm.max_map_count=262144
+  - docker-compose -f testingEnv/docker-compose.yml up -d
   - sleep 20
 
   # Install dependencies
