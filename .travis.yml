@@ -21,6 +21,7 @@ before_install:
   - docker exec -it test npm install --only=dev
 
 script:
+  - docker exec -it test getent hosts elasticsearch
   - docker exec -it test curl http://elasticsearch:9200
   - docker exec -it test ng e2e
 
