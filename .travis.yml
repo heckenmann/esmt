@@ -1,11 +1,6 @@
 ---
 sudo: required
 
-language: node_js
-
-node_js:
-  - "7"
-
 services:
   - docker
 
@@ -19,27 +14,19 @@ before_install:
   - docker-compose version
   # Create elasticsearch container and start them
   - docker-compose -f testingEnv/docker-compose.yml up -d
-  # Install angular cli
-  - npm install -g @angular/cli
-  - npm install
-  - npm install --only=dev
-  # Install chrome
-  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee --append /etc/apt/sources.list.d/google.list
-  - sudo apt-get update
-  - sudo apt-get install -y -qq google-chrome-stable xvfb default-jre
-  - export CHROME_BIN=google-chrome
-  - export DISPLAY=:99.0
-  # Install xvfb
-  - sudo Xvfb $DISPLAY -ac &
-  - sleep 10
+  # Testcontainer
+  - docker build -t esmt testingEnv/
+
+  - docker run -d --rm --privileged --name test -v "$(pwd):/opt/esmt" --link testingenv_elasticsearch00_1:elasticsearch --net testingenv_default esmt
+  - docker exec -it test npm install && npm install --only=dev
 
 script:
-  - ng e2e
+  - docker exec -it test ng e2e
 
 after_success:
-  - ng build --prod
+  - docker run -it --rm -v .:/opt/esmt esmt ng build --prod
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
 
 after_script:
+  - docker rm -f test
   - docker-compose -f testingEnv/docker-compose.yml down

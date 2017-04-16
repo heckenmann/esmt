@@ -1,7 +1,9 @@
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
-const { SpecReporter } = require('jasmine-spec-reporter');
+const {
+  SpecReporter
+} = require('jasmine-spec-reporter');
 
 exports.config = {
   allScriptsTimeout: 11000,
@@ -28,6 +30,21 @@ exports.config = {
     });
   },
   onPrepare() {
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    jasmine.getEnv().addReporter(new SpecReporter({
+      spec: {
+        displayStacktrace: true
+      }
+    }));
+
+    browser.get('/');
+    // set elasticsearch host
+    element(by.id('settings_link')).click().then(() => {
+      let saveButton = element(by.id('save_button'));
+      let esurlInput = element(by.id('esurl'));
+      let testurl = 'http://elasticsearch:9200';
+      esurlInput.clear();
+      esurlInput.sendKeys(testurl);
+      saveButton.click();
+    });
   }
 };
