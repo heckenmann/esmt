@@ -42,5 +42,6 @@ services:
     container_name: test
     volumes:
       - ..:/opt/esmt
+    privileged: true
     links:
       - elasticsearch00:elasticsearch
