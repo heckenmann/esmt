@@ -4,7 +4,7 @@ MAINTAINER heckenmann.de
 RUN mkdir -p /opt/esmt
 WORKDIR /opt/esmt
 
-RUN apt-get update && apt-get install -y curl wget iptables git
+RUN apt-get update && apt-get install -y curl wget git
 
 # Install node (later)
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
