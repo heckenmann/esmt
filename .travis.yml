@@ -18,7 +18,8 @@ before_install:
   - docker build -t esmt testingEnv/
 
   - docker run -d --rm --privileged --name test -v "$(pwd):/opt/esmt" --link testingenv_elasticsearch00_1:elasticsearch --net testingenv_default esmt
-  - docker exec -it test npm install && npm install --only=dev
+  - docker exec -it test npm install
+  - docker exec -it test npm install --only=dev
 
 script:
   - docker exec -it test ng e2e
