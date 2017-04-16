@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 MAINTAINER heckenmann.de
 
 RUN mkdir -p /opt/esmt
