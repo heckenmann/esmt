@@ -36,6 +36,7 @@ exports.config = {
       }
     }));
 
+    browser.driver.manage().window().setSize(1650, 800);
     browser.get('/');
     // set elasticsearch host
     element(by.id('settings_link')).click().then(() => {
@@ -44,7 +45,9 @@ exports.config = {
       let testurl = 'http://elasticsearch:9200';
       esurlInput.clear();
       esurlInput.sendKeys(testurl);
-      saveButton.click();
+      saveButton.click().then(() => {
+        element(by.css('span.icon-close')).click();
+      });
     });
   }
 };

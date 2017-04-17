@@ -3,7 +3,6 @@ import { browser, element, by } from 'protractor';
 describe('Settings', function() {
 
   beforeAll(() => {
-    browser.driver.manage().window().setSize(1600, 600);
     element(by.id('settings_link')).click();
   });
 

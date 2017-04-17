@@ -1,9 +1,9 @@
 import { browser, element, by } from 'protractor';
 
-describe('Dashboard', function() {
+describe('Info', function() {
 
   beforeAll(() => {
-    element(by.id('dashboard_link')).click();
+    element(by.id('info_link')).click();
   });
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('Dashboard', function() {
 
   it('Header', () => {
     let currentHeader = element(by.css('.aui-page-header h1')).getText();
-    expect(currentHeader).toEqual('Cluster Dashboard "docker-cluster"');
+    expect(currentHeader).toEqual('Info');
   });
 
 });

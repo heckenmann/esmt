@@ -49,22 +49,49 @@ You are welcome to commit your stuff.
 - Atlassian AUI
 - elasticsearch 5
 
+### Bootstrapping Environment
+To start 3 elasticsearch nodes and a container for developing/testing, you have to install docker and docker-compose. After that you can execute the command:
+```
+# You have to cd to the project-root-directory, then
+docker-compose -f testingEnv/docker-compose.yml up -d
+
+# Install dependencies
+docker exec -it test npm install
+docker exec -it test npm install --only=dev
+```
+The project folder will be mounted into the container. So you can edit the files with an editor of your choice on the host-system.
+
 ### Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run
+```
+docker exec -it test ng serve
+```
+for a dev server. Navigate to `http://<container-ip>:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Run
+```
+docker exec -it test ng generate component component-name
+```
+to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
 ### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run
+```
+docker exec -it test ng build
+```
+to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-### Running unit tests
+### Running unit tests (Not implemented)
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ### Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Run
+```
+docker exec -it test ng e2e
+```
+to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
