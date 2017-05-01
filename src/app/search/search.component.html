@@ -40,6 +40,12 @@
   <div class="aui-page-panel">
     <div class="aui-page-panel-inner">
       <section class="aui-page-panel-content">
+        <p *ngIf="searchResult != null">
+          <span>Total: {{searchResult?.hits?.total}}; </span>
+          <span>Shards total / successful: {{searchResult?._shards?.total}} / {{searchResult?._shards?.successful}}; </span>
+          <span>Timed out: {{searchResult?.timed_out}}; </span>
+          <span>Max score: {{searchResult?.hits.max_score}}; </span>
+        </p>
         <table class="aui">
           <thead>
             <tr>
