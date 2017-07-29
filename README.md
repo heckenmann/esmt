@@ -38,7 +38,7 @@ TODO
 TODO
 
 ### Configure elasticsearch
-TODO
+See testingEnv/docker-compose.yml and https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html for details.
 
 ## Development
 
@@ -58,15 +58,18 @@ docker-compose -f testingEnv/docker-compose.yml up -d
 # Install dependencies
 docker exec -it test npm install
 docker exec -it test npm install --only=dev
+
+# Install test-data
+docker exec -it test bash testingEnv/data2es.sh
 ```
 The project folder will be mounted into the container. So you can edit the files with an editor of your choice on the host-system.
 
 ### Development server
 Run
 ```
-docker exec -it test ng serve
+docker exec -it test ng serve --host 0.0.0.0
 ```
-for a dev server. Navigate to `http://<container-ip>:4200/`. The app will automatically reload if you change any of the source files.
+for a dev server. Navigate to `http://<container-ip>:4200/`. The app will automatically reload if you change any of the source files. You have to set the one elasticsearch-node-IP under settings.
 
 ### Code scaffolding
 
