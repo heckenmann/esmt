@@ -27,6 +27,7 @@ import { GeneratorComponent } from './generator/generator.component';
 import { HttpService } from './http.service';
 import { WindowRefService } from './window-ref.service';
 import { FlagService } from './flag.service';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { FlagService } from './flag.service';
     HttpModule,
     //HttpCacheModule,
     JsonpModule,
+    Ng2OrderModule,
     RouterModule.forRoot([
       {
         path: '',

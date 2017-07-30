@@ -95,7 +95,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let index of indicesStates | mapValues">
+          <tr *ngFor="let index of indicesStates | mapValues | orderBy: 'key'">
             <td> <a [routerLink]="['/indices', index.key]">Details</a> </td>
             <td>{{index.key}}</td>
             <td>

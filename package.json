@@ -27,7 +27,8 @@
     "jquery": "^2",
     "rxjs": "^5.4.2",
     "uglify-es": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
-    "zone.js": "^0.8.16"
+    "zone.js": "^0.8.16",
+    "ng2-order-pipe": "^0.1.5"
   },
   "devDependencies": {
     "@angular/cli": "1.0.0",

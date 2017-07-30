@@ -44,7 +44,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let node of nodesStats['nodes'] | mapValues">
+          <tr *ngFor="let node of nodesStats['nodes'] | mapValues | orderBy: 'key'">
             <td headers="th_options"><a [routerLink]="['/nodes', node.key]">Details</a></td>
             <td headers="th_name">{{node.val.name}}</td>
             <td headers="th_transport_address">{{node.val.transport_address}}</td>
