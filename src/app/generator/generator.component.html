@@ -1,3 +1,60 @@
-<p>
-  generator works!
-</p>
+<form class="aui">
+  <div class="aui-page-panel-inner">
+    <div class="aui-page-panel-content">
+      <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+          <div class="aui-page-header-image">
+          </div>
+          <div class="aui-page-header-main">
+            <h1>Data Generator</h1>
+          </div>
+          <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+              <button id="refresh_button" class="aui-button aui-button-primary" (click)="startGenerator()" [disabled]="!names || !firstnames || !middlenames || !places">Start generator</button>
+              <button id="refresh_button" class="aui-button" (click)="loadTestData()">Load test-data from inet</button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+      <section class="aui-page-panel-content">
+
+        <div class="radio">
+          <input class="radio" type="radio" checked="checked" name="indexcreation" id="createnewindex" [(ngModel)]="existingIndexUsed" [value]="false">
+          <label for="createnewindex">Create new index</label>
+        </div>
+        <div class="field-group">
+          <label for="index">Index:<span class="aui-icon icon-required">required</span></label>
+          <input class="text" type="index" id="index" name="index" title="index" [(ngModel)]="index" [disabled]="existingIndexUsed" required="required">
+        </div>
+        <div class="radio">
+          <input class="radio" type="radio" checked="checked" name="indexcreation" id="useexistingindex" [(ngModel)]="existingIndexUsed" [value]="true">
+          <label for="useexistingindex">Use existing index</label>
+        </div>
+        <div class="field-group">
+          <label for="select-example">Existing Index:<span class="aui-icon icon-required">required</span></label>
+          <select class="select" id="select-example" name="select-example" [disabled]="!existingIndexUsed" required="required" [(ngModel)]="index">
+            <option *ngFor="let alias of aliases | mapValues | orderBy: 'key'">{{alias.key}}</option>
+         </select>
+        </div>
+        <br/>
+        <div class="field-group">
+          <label for="type">Type:<span class="aui-icon icon-required">required</span></label>
+          <input class="text medium-field" type="type" id="type" name="type" title="type" [(ngModel)]="type" required="required">
+        </div>
+        <div class="field-group">
+          <label for="count">Count of outputs:<span class="aui-icon icon-required">required</span></label>
+          <input class="text medium-field" type="text" id="count" name="count" title="count" [(ngModel)]="count" type="number" min="100" step="100" >
+        </div>
+        <br/>
+        <div id="progress" class="aui-progress-indicator" *ngIf="inProgress > 0">
+          <span class="aui-progress-indicator-value"></span>
+        </div>
+      </section>
+    </div>
+  </div>
+</form>
