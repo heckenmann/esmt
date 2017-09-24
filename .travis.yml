@@ -35,6 +35,10 @@ script:
 after_success:
   - docker exec -it test ng build --prod
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push heckenmann/esmt;
+    fi
 
 after_script:
   - docker-compose -f testingEnv/docker-compose.yml down
