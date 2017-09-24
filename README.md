@@ -35,7 +35,9 @@ snapshot and restore module | Modules | &#10004;
 TODO
 
 ## Run the application
-TODO
+```
+docker run -d --restart always --name esmt -p 8080:80 heckenmann/esmt
+```
 
 ### Configure elasticsearch
 See testingEnv/docker-compose.yml and https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-http.html for details.
