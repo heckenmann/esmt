@@ -33,8 +33,8 @@ script:
   - docker exec -it test ng e2e
 
 after_success:
-  - ls ./dist
   - docker exec -it test ng build --prod
+  - ls ./dist
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
   - docker tag heckenmann/esmt:$TRAVIS_JOB_ID heckenmann/esmt:latest
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
