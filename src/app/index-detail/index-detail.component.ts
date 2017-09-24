@@ -11,7 +11,7 @@ import { SuperComponent } from '../super.component';
 })
 export class IndexDetailComponent extends SuperComponent implements OnInit {
 
-  id: String;
+  id: string;
   settings: Map<string, any> = new Map<string, any>();
 
   constructor(

@@ -26,12 +26,12 @@
     "font-awesome": "^4.7.0",
     "jquery": "^2",
     "rxjs": "^5.4.2",
-    "uglify-es": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
+    "uglify-es": "git+https://github.com/mishoo/UglifyJS2.git",
     "zone.js": "^0.8.16",
     "ng2-order-pipe": "^0.1.5"
   },
   "devDependencies": {
-    "@angular/cli": "1.2.3",
+    "@angular/cli": "1.4.3",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.53",
     "@types/node": "^6.0.85",
@@ -49,6 +49,6 @@
     "ts-node": "~3.3.0",
     "tslint": "^4.0.0",
     "typescript": "^2.4.2",
-    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git"
   }
 }
