@@ -33,7 +33,7 @@ script:
   - docker exec -it test ng e2e
 
 after_success:
-  - docker exec -it test ng build --prod
+  - docker exec -it test ng build
   - ls ./dist
   - docker build -t heckenmann/esmt:$TRAVIS_JOB_ID .
   - docker tag heckenmann/esmt:$TRAVIS_JOB_ID heckenmann/esmt:latest
