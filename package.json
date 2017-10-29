@@ -22,17 +22,17 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-
-    "@atlassian/aui": "6.0.8",
+    "@atlassian/aui": "6.1.1",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^2",
+    "ngx-order-pipe": "^1.0.3",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.16",
-    "ng2-order-pipe": "^0.1.5"
+    "reflect-metadata": "0.1.10"
   },
   "devDependencies": {
-    "@angular/cli": "1.4.3",
+    "@angular/cli": "1.4.9",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/language-service": "^4.2.4",
     "@types/jasmine": "~2.5.53",
