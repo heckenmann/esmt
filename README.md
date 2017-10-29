@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/heckenmann/esmt.svg?branch=master)](https://travis-ci.org/heckenmann/esmt)
 
-***!!! Under development !!!***
+Project is still under development! Feel free to push your code! :)
+
 
 # ESMT (elasticsearch management tool)
 
