@@ -26,9 +26,18 @@
   </div>
 </div>
 
+
 <div class="aui-page-panel">
   <div class="aui-page-panel-inner">
     <section class="aui-page-panel-content">
+
+      <div class="aui-message error">
+        <p class="title">
+          <span class="aui-icon icon-error"></span>
+          <strong>Warning!</strong>
+        </p>
+        <p>This software is under development and may not enough tested. Please don't use it on productive systems.</p>
+      </div>
 
       <div style="text-align: center;">
         <span class="own-metric">
@@ -78,7 +87,7 @@
                 <td>{{state.key}}</td>
                 <td>
                   <span [class.aui-lozenge]="(state.val | checkState:state.key) != null" [class.aui-lozenge-success]="(state.val | checkState:state.key) == 'SUCCESS'" [class.aui-lozenge-current]="(state.val | checkState:state.key) == 'WARNING'" [class.aui-lozenge-error]="(state.val | checkState:state.key) == 'ERROR'"
-                      [class.aui-lozenge-default]="(state.val | checkState:state.key) == 'DEFAULT'">{{state.val}}</span>
+                    [class.aui-lozenge-default]="(state.val | checkState:state.key) == 'DEFAULT'">{{state.val}}</span>
                 </td>
               </tr>
             </tbody>
