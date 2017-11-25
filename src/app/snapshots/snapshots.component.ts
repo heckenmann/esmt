@@ -34,7 +34,7 @@ export class SnapshotsComponent extends SuperComponent implements OnInit {
   newsnapshot: any = {
     repository: null,
     indices: null,
-    name,
+    name: null,
     data: {
       indices: null,
       ignore_unavailable: true,

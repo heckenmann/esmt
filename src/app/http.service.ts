@@ -19,6 +19,7 @@ export class HttpPaths {
   static ALL_REPOSITORIES = HttpPaths.REPOSITORIES + '/_all';
   // Index open / closed?
   static INDICES_STATES = '/_cluster/state?filter_path=metadata.indices.*.state';
+  static REINDEX = '/_reindex';
 }
 
 @Injectable()

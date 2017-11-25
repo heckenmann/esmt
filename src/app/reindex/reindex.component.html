@@ -1,0 +1,58 @@
+<form class="aui" #reindexForm="ngForm">
+  <div class="aui-page-panel-inner">
+    <div class="aui-page-panel-content">
+      <header class="aui-page-header">
+        <div class="aui-page-header-inner">
+          <div class="aui-page-header-image">
+          </div>
+          <div class="aui-page-header-main">
+            <h1>Reindex</h1>
+          </div>
+          <div class="aui-page-header-actions">
+            <div class="aui-buttons">
+              <button type="submit" id="refresh_button" class="aui-button aui-button-primary" (click)="reindex()" [disabled]="!reindexForm.form.valid">Reindex</button>
+              <a id="snapshotapi-doc-button" class="aui-button" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html" target="_blank">Official Doc</a>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+      <section class="aui-page-panel-content">
+        <h2>Source</h2>
+        <div class="field-group">
+          <label for="indicesselect">indices:</label>
+          <select class="multi-select" size="15" multiple="multiple" id="indicesselect" name="indicesselect" required [(ngModel)]="newReindex.source.index">
+              <option *ngFor="let alias of aliases | mapValues | orderBy: 'key'">{{alias.key}}</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="sourceIndex">index (wildcards allowed):<span class="aui-icon icon-required">(required)</span></label>
+          <input name="sourceIndex" class="text" type="text" id="sourceIndex" [(ngModel)]="newReindex.source.index" required />
+        </div>
+        <div class="field-group">
+          <label for="size">size:<span class="aui-icon icon-required">required</span></label>
+          <input class="text medium-field" type="text" id="size" name="size" title="size" [(ngModel)]="newReindex.source.size" type="number">
+        </div>
+      </section>
+
+      <section class="aui-page-panel-content">
+        <h2>Destination</h2>
+        <div class="field-group">
+          <label for="destIndex">index:<span class="aui-icon icon-required">(required)</span></label>
+          <input name="destIndex" class="text" type="text" id="destIndex" [(ngModel)]="newReindex.dest.index" required />
+        </div>
+        <div class="field-group">
+          <label for="versionType">version_type:<span class="aui-icon icon-required">(required)</span></label>
+          <select class="select" id="versionType" name="versionType" required [(ngModel)]="newReindex.dest.version_type">
+              <option>internal</option>
+              <option>external</option>
+          </select>
+        </div>
+      </section>
+    </div>
+  </div>
+</form>

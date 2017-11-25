@@ -28,6 +28,7 @@ import { HttpService } from './http.service';
 import { WindowRefService } from './window-ref.service';
 import { FlagService } from './flag.service';
 import { OrderModule } from 'ngx-order-pipe';
+import { ReindexComponent } from './reindex/reindex.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { OrderModule } from 'ngx-order-pipe';
     SnapshotsComponent,
     SettingsComponent,
     InfoComponent,
-    GeneratorComponent
+    GeneratorComponent,
+    ReindexComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +100,10 @@ import { OrderModule } from 'ngx-order-pipe';
       {
         path: 'generator',
         component: GeneratorComponent
+      },
+      {
+        path: 'reindex',
+        component: ReindexComponent
       },
       {
         path: 'settings',
