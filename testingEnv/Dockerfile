@@ -7,7 +7,7 @@ WORKDIR /opt/esmt
 RUN apt-get update && apt-get install -y curl wget git
 
 # Install node (later)
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
 # Install chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
